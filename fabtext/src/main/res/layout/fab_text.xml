@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:app="http://schemas.android.com/apk/res-auto"
+       xmlns:tools="http://schemas.android.com/tools"
+       xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/fab_container"
+                  android:orientation="horizontal"
+                  android:background="@drawable/fab_text_bg"
+                  android:focusable="true"
+                  android:clickable="true"
+                  android:layout_margin="@dimen/fab_margin"
+                  android:elevation="@dimen/fab_rest_elevation"
+                  android:stateListAnimator="@anim/fab_state_list_anim"
+                  tools:ignore="UnusedAttribute">
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_android_black_24dp"
+                android:tint="@android:color/white"
+                android:id="@+id/image_fab"
+                android:layout_marginLeft="@dimen/fab_inner_margin_left"
+                android:layout_marginStart="@dimen/fab_inner_margin_left"
+                android:layout_gravity="center"/>
+        <TextView android:id="@+id/text_fab"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  tools:text="Button"
+                  android:layout_gravity="center"
+                  android:gravity="center"
+                  android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                  android:textColor="@android:color/white"
+                  android:layout_marginLeft="@dimen/fab_inner_margin_left"
+                  android:layout_marginStart="@dimen/fab_inner_margin_left"
+                  android:layout_marginRight="@dimen/fab_inner_margin_right"
+                  android:layout_marginEnd="@dimen/fab_inner_margin_right"/>
+    </LinearLayout>
+</merge>
