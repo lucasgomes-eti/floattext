@@ -29,6 +29,12 @@ open class FabText : LinearLayout {
     private var imageTint: Int? = null
     private var backgroundColor: String? = null
 
+    interface FabTextListener {
+        fun onFabTextClick()
+    }
+
+    var listener: FabTextListener? = null
+
     constructor(context: Context) : super(context) {
         initializeView(context)
     }
@@ -60,6 +66,11 @@ open class FabText : LinearLayout {
 
     fun Context.createVectorCompatDrawable(drawableId: Int) =
         DrawableCompat.wrap(VectorDrawableCompat.create(this.resources, drawableId, this.theme) as Drawable)
+
+
+    fun setFabTextListener(listener: FabTextListener) {
+        this.listener = listener
+    }
 
     override fun onFinishInflate() {
         super.onFinishInflate()
@@ -94,8 +105,16 @@ open class FabText : LinearLayout {
                 fabContainer?.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.fab_bg))
             }
 
+            fabContainer?.background?.setColorFilter(Color.parseColor(if (backgroundColor.isNullOrEmpty()) {
+                "#ffffff"
+            } else {
+                backgroundColor
+            }), PorterDuff.Mode.SRC_ATOP)
+
             fabImageView?.setPadding(8, 0, 0, 0)
         }
+
+        fabContainer?.setOnClickListener { listener?.onFabTextClick() }
     }
 
     fun collapse() {
@@ -108,6 +127,12 @@ open class FabText : LinearLayout {
             @Suppress("DEPRECATION")
             fabContainer?.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.fab_bg))
         }
+
+        fabContainer?.background?.setColorFilter(Color.parseColor(if (backgroundColor.isNullOrEmpty()) {
+            "#ffffff"
+        } else {
+            backgroundColor
+        }), PorterDuff.Mode.SRC_ATOP)
 
         fabImageView?.setPadding(8, 0, 0, 0)
     }
@@ -123,6 +148,12 @@ open class FabText : LinearLayout {
                 @Suppress("DEPRECATION")
                 fabContainer?.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.fab_text_bg))
             }
+
+            fabContainer?.background?.setColorFilter(Color.parseColor(if (backgroundColor.isNullOrEmpty()) {
+                "#ffffff"
+            } else {
+                backgroundColor
+            }), PorterDuff.Mode.SRC_ATOP)
 
             fabImageView?.setPadding(0, 0, 0, 0)
         }
