@@ -21,7 +21,9 @@
                                android:layout_marginStart="8dp"
                                app:layout_constraintEnd_toEndOf="parent"
                                android:id="@+id/fabText"
-                               app:layout_constraintHorizontal_bias="1.0" app:layout_constraintVertical_bias="1.0"/>
+                               app:layout_constraintHorizontal_bias="1.0" app:layout_constraintVertical_bias="1.0"
+                               android:layout_marginBottom="16dp" android:layout_marginEnd="16dp"
+                               android:layout_marginRight="16dp"/>
     <Button
             android:text="@string/expand"
             android:layout_width="wrap_content"

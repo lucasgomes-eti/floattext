@@ -1,18 +1,22 @@
 package com.lucas.fabtext
 
+import android.animation.AnimatorInflater
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.os.Build
+import android.os.Handler
 import android.support.graphics.drawable.VectorDrawableCompat
 import android.support.transition.TransitionManager
 import android.support.v4.content.ContextCompat
 import android.support.v4.graphics.drawable.DrawableCompat
+import android.support.v4.view.ViewCompat
 import android.support.v4.widget.ImageViewCompat
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -29,11 +33,7 @@ open class FabText : LinearLayout {
     private var imageTint: Int? = null
     private var backgroundColor: String? = null
 
-    interface FabTextListener {
-        fun onFabTextClick()
-    }
-
-    var listener: FabTextListener? = null
+    var onClickListener: (View) -> Unit = {}
 
     constructor(context: Context) : super(context) {
         initializeView(context)
@@ -67,11 +67,6 @@ open class FabText : LinearLayout {
     fun Context.createVectorCompatDrawable(drawableId: Int) =
         DrawableCompat.wrap(VectorDrawableCompat.create(this.resources, drawableId, this.theme) as Drawable)
 
-
-    fun setFabTextListener(listener: FabTextListener) {
-        this.listener = listener
-    }
-
     override fun onFinishInflate() {
         super.onFinishInflate()
 
@@ -82,7 +77,20 @@ open class FabText : LinearLayout {
         fabTextView?.text = textValue
         fabTextView?.setTextColor(textColorValue!!)
 
+        ViewCompat.setElevation(this, context.resources.getDimension(R.dimen.fab_rest_elevation))
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            stateListAnimator = AnimatorInflater.loadStateListAnimator(context, R.anim.fab_state_list_anim)
+            isFocusable = true
+            isClickable = true
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            background = ContextCompat.getDrawable(context, R.drawable.fab_text_bg)
+        } else {
+            @Suppress("DEPRECATION")
+            setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.fab_text_bg))
+        }
 
         fabImageView?.setImageDrawable(context.createVectorCompatDrawable(imageDrawable!!))
 
@@ -114,27 +122,38 @@ open class FabText : LinearLayout {
             fabImageView?.setPadding(8, 0, 0, 0)
         }
 
-        fabContainer?.setOnClickListener { listener?.onFabTextClick() }
+        fabContainer?.setOnClickListener {
+            try {
+                onClickListener.invoke(it)
+            } catch (e: UninitializedPropertyAccessException) {
+                e.printStackTrace()
+            }
+        }
     }
 
     fun collapse() {
         TransitionManager.beginDelayedTransition(this)
         fabTextView?.visibility = GONE
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            fabContainer?.background = ContextCompat.getDrawable(context, R.drawable.fab_bg)
-        } else {
-            @Suppress("DEPRECATION")
-            fabContainer?.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.fab_bg))
-        }
+        Handler().postDelayed({
+            TransitionManager.beginDelayedTransition(this)
 
-        fabContainer?.background?.setColorFilter(Color.parseColor(if (backgroundColor.isNullOrEmpty()) {
-            "#ffffff"
-        } else {
-            backgroundColor
-        }), PorterDuff.Mode.SRC_ATOP)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                fabContainer?.background = ContextCompat.getDrawable(context, R.drawable.fab_bg)
+            } else {
+                @Suppress("DEPRECATION")
+                fabContainer?.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.fab_bg))
+            }
 
-        fabImageView?.setPadding(8, 0, 0, 0)
+            fabContainer?.background?.setColorFilter(Color.parseColor(if (backgroundColor.isNullOrEmpty()) {
+                "#ffffff"
+            } else {
+                backgroundColor
+            }), PorterDuff.Mode.SRC_ATOP)
+
+            fabImageView?.setPadding(8, 0, 0, 0)
+        }, 200)
+
     }
 
     fun expand() {
