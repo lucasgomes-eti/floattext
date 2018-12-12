@@ -1,6 +1,9 @@
 package com.lucas.fabtext
 
 import android.animation.AnimatorInflater
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
+import android.animation.ValueAnimator.REVERSE
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -34,6 +37,8 @@ open class FabText : LinearLayout {
     private var backgroundColor: String? = null
 
     var onClickListener: (View) -> Unit = {}
+
+    val animatorSet = AnimatorSet()
 
     constructor(context: Context) : super(context) {
         initializeView(context)
@@ -176,5 +181,26 @@ open class FabText : LinearLayout {
 
             fabImageView?.setPadding(0, 0, 0, 0)
         }
+    }
+
+    fun startLoading() {
+        fabImageView?.setImageDrawable(context.createVectorCompatDrawable(R.drawable.dual_ring))
+        fabContainer?.isEnabled = false
+
+        val rotationAnimator = ObjectAnimator
+            .ofFloat(fabImageView, View.ROTATION, 360f)
+            .setDuration(1000)
+
+        rotationAnimator.repeatCount = ObjectAnimator.INFINITE
+        rotationAnimator.repeatMode = ObjectAnimator.RESTART/REVERSE
+
+        animatorSet.play(rotationAnimator)
+        animatorSet.start()
+    }
+
+    fun finishLoading() {
+        fabImageView?.setImageDrawable(context.createVectorCompatDrawable(imageDrawable!!))
+        fabContainer?.isEnabled = true
+        animatorSet.end()
     }
 }

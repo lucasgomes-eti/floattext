@@ -38,5 +38,19 @@
             android:id="@+id/btn_collapse" android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@+id/btn_expand" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="8dp" android:layout_marginStart="8dp"/>
+    <Button
+            android:text="@string/start_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_start_loading" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/btn_collapse" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="8dp" android:layout_marginStart="8dp"/>
+    <Button
+            android:text="@string/finish_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_finish_loading" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/btn_start_loading" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="8dp" android:layout_marginStart="8dp"/>
 
 </android.support.constraint.ConstraintLayout>

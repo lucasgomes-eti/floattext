@@ -11,8 +11,8 @@
                   android:clickable="true"
                   tools:ignore="UnusedAttribute">
         <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 app:srcCompat="@drawable/ic_android_black_24dp"
                 android:tint="@android:color/white"
                 android:id="@+id/image_fab"

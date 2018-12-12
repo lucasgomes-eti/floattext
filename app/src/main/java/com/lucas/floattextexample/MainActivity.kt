@@ -21,6 +21,14 @@ class MainActivity : AppCompatActivity() {
             fabText.expand()
         }
 
+        btn_start_loading.setOnClickListener {
+            fabText.startLoading()
+        }
+
+        btn_finish_loading.setOnClickListener {
+            fabText.finishLoading()
+        }
+
         fabText.onClickListener = {
             Toast.makeText(this, "iami", Toast.LENGTH_LONG).show()
         }
