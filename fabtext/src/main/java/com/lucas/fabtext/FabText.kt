@@ -90,12 +90,7 @@ open class FabText : LinearLayout {
             isClickable = true
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            background = ContextCompat.getDrawable(context, R.drawable.fab_text_bg)
-        } else {
-            @Suppress("DEPRECATION")
-            setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.fab_text_bg))
-        }
+        setBackgroundResource(R.drawable.fab_text_bg)
 
         fabImageView?.setImageDrawable(context.createVectorCompatDrawable(imageDrawable!!))
 
@@ -111,20 +106,13 @@ open class FabText : LinearLayout {
 
             fabTextView?.visibility = GONE
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                fabContainer?.background = ContextCompat.getDrawable(context, R.drawable.fab_bg)
-            } else {
-                @Suppress("DEPRECATION")
-                fabContainer?.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.fab_bg))
-            }
+            fabContainer?.setBackgroundResource(R.drawable.fab_bg)
 
             fabContainer?.background?.setColorFilter(Color.parseColor(if (backgroundColor.isNullOrEmpty()) {
                 "#ffffff"
             } else {
                 backgroundColor
             }), PorterDuff.Mode.SRC_ATOP)
-
-            fabImageView?.setPadding(8, 0, 0, 0)
         }
 
         fabContainer?.setOnClickListener {
@@ -142,21 +130,13 @@ open class FabText : LinearLayout {
 
         Handler().postDelayed({
             TransitionManager.beginDelayedTransition(this)
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                fabContainer?.background = ContextCompat.getDrawable(context, R.drawable.fab_bg)
-            } else {
-                @Suppress("DEPRECATION")
-                fabContainer?.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.fab_bg))
-            }
+            fabContainer?.setBackgroundResource(R.drawable.fab_bg)
 
             fabContainer?.background?.setColorFilter(Color.parseColor(if (backgroundColor.isNullOrEmpty()) {
                 "#ffffff"
             } else {
                 backgroundColor
             }), PorterDuff.Mode.SRC_ATOP)
-
-            fabImageView?.setPadding(8, 0, 0, 0)
         }, 200)
 
     }
@@ -166,25 +146,18 @@ open class FabText : LinearLayout {
             TransitionManager.beginDelayedTransition(this)
             fabTextView?.visibility = VISIBLE
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                fabContainer?.background = ContextCompat.getDrawable(context, R.drawable.fab_text_bg)
-            } else {
-                @Suppress("DEPRECATION")
-                fabContainer?.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.fab_text_bg))
-            }
+            fabContainer?.setBackgroundResource(R.drawable.fab_text_bg)
 
             fabContainer?.background?.setColorFilter(Color.parseColor(if (backgroundColor.isNullOrEmpty()) {
                 "#ffffff"
             } else {
                 backgroundColor
             }), PorterDuff.Mode.SRC_ATOP)
-
-            fabImageView?.setPadding(0, 0, 0, 0)
         }
     }
 
     fun startLoading() {
-        fabImageView?.setImageDrawable(context.createVectorCompatDrawable(R.drawable.dual_ring))
+        fabImageView?.setImageResource(R.drawable.dual_ring)
         fabContainer?.isEnabled = false
 
         val rotationAnimator = ObjectAnimator
@@ -199,7 +172,7 @@ open class FabText : LinearLayout {
     }
 
     fun finishLoading() {
-        fabImageView?.setImageDrawable(context.createVectorCompatDrawable(imageDrawable!!))
+        fabImageView?.setImageResource(imageDrawable!!)
         fabContainer?.isEnabled = true
         animatorSet.end()
     }

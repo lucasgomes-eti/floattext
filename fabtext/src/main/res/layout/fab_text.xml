@@ -7,17 +7,17 @@
                   android:id="@+id/fab_container"
                   android:orientation="horizontal"
                   android:background="@drawable/fab_text_bg"
+                  android:paddingLeft="16dp"
+                  android:paddingRight="16dp"
+                  android:layout_gravity="center_horizontal|center_vertical"
                   android:focusable="true"
-                  android:clickable="true"
-                  tools:ignore="UnusedAttribute">
+                  android:clickable="true">
         <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 app:srcCompat="@drawable/ic_android_black_24dp"
                 android:tint="@android:color/white"
                 android:id="@+id/image_fab"
-                android:layout_marginLeft="@dimen/fab_inner_margin_left"
-                android:layout_marginStart="@dimen/fab_inner_margin_left"
                 android:layout_gravity="center"/>
         <TextView android:id="@+id/text_fab"
                   android:layout_width="wrap_content"
@@ -28,8 +28,6 @@
                   android:textAppearance="@style/TextAppearance.AppCompat.Button"
                   android:textColor="@android:color/white"
                   android:layout_marginLeft="@dimen/fab_inner_margin_left"
-                  android:layout_marginStart="@dimen/fab_inner_margin_left"
-                  android:layout_marginRight="@dimen/fab_inner_margin_right"
-                  android:layout_marginEnd="@dimen/fab_inner_margin_right"/>
+                  android:layout_marginStart="@dimen/fab_inner_margin_left"/>
     </LinearLayout>
 </merge>
