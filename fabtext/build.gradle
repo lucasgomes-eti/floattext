@@ -9,8 +9,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 28
-        versionCode 4
-        versionName "1.0.3"
+        versionCode 5
+        versionName "1.0.4"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -55,7 +55,7 @@ ext {
     siteUrl = 'https://github.com/lucasgomes-eti/floattext'
     gitUrl = 'https://github.com/lucasgomes-eti/floattext.git'
 
-    libraryVersion = '1.0.3'
+    libraryVersion = '1.0.4'
 
     developerId = 'lucasgomes-eti'
     developerName = 'Lucas Gomes'
