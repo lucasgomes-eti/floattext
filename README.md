@@ -1,12 +1,14 @@
 # Float Text
 
-[ ![Download](https://api.bintray.com/packages/lucasgomes-eti/floattext/fabtext/images/download.svg) ](https://bintray.com/lucasgomes-eti/floattext/fabtext/_latestVersion)
+[![Download](https://api.bintray.com/packages/lucasgomes-eti/floattext/fabtext/images/download.svg)](https://bintray.com/lucasgomes-eti/floattext/fabtext/_latestVersion)
 
 A Custom implementation for android float action button where a text property and some other functions was added.
 
-![](Screenshot_1549387237.png)
 
-![](Screenshot_1549387243.png)
+
+<img src="Screenshot_1549387237.png" style="height:640px" />
+
+<img src="Screenshot_1549387243.png" style="height:640px" />
 
 ## Download
 
@@ -15,19 +17,22 @@ A Custom implementation for android float action button where a text property an
 ## Getting Started
 
 Add this to your layout file namespace:
-    
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+```xml
+xmlns:app="http://schemas.android.com/apk/res-auto"
+```
 
 Component declaration:
 
-    <com.lucas.fabtext.FabText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:text="@string/app_name"
-            app:text_color="@android:color/white"
-            app:icon_color="@android:color/white"
-            app:color="@color/colorAccent"
-            android:id="@+id/fabText"/>
+```xml
+<com.lucas.fabtext.FabText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:text="@string/app_name"
+        app:text_color="@android:color/white"
+        app:icon_color="@android:color/white"
+        app:color="@color/colorAccent"
+        android:id="@+id/fabText"/>
+```
 
 XML Properties:
 
@@ -55,7 +60,7 @@ In your activity or fragment you must implement this interface:
 
     class MyFragment : Fragment(), ObservableScrollView.ScrollViewListener {
         myScrollView.setScrollViewListener(this)
-
+    
         override fun onScrollViewTouchEvent(event: MotionEvent?) {
             when(event?.action) {
                 MotionEvent.ACTION_DOWN -> {
