@@ -4,15 +4,13 @@
 
 A Custom implementation for android float action button where a text property and some other functions was added.
 
-
-
-![](./Screenshot_1549387237.png)
-
-<img src="Screenshot_1549387243.png" style="height:640px" />
+![](./FloatText.gif)
 
 ## Download
 
-    implementation 'com.lucasgomes:fabtext:1.0.4'
+```groovy
+implementation 'com.lucasgomes:fabtext:1.0.4'
+```
 
 ## Getting Started
 
