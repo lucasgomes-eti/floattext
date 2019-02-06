@@ -50,28 +50,32 @@ You can use this with scroll view to collapse automatic when user is scrolling, 
 
 Observable Scroll View Declaration:
 
-    <com.lucas.fabtext.ObservableScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/myScrollView"
-                android:fillViewport="true">
+```xml
+<com.lucas.fabtext.ObservableScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/myScrollView"
+            android:fillViewport="true">
+```
 
 In your activity or fragment you must implement this interface:
 
-    class MyFragment : Fragment(), ObservableScrollView.ScrollViewListener {
-        myScrollView.setScrollViewListener(this)
-    
-        override fun onScrollViewTouchEvent(event: MotionEvent?) {
-            when(event?.action) {
-                MotionEvent.ACTION_DOWN -> {
-                    fabText.collapse()
-                }
-                MotionEvent.ACTION_UP -> {
-                    fabText.expand()
-                }
+```kotlin
+class MyFragment : Fragment(), ObservableScrollView.ScrollViewListener {
+    myScrollView.setScrollViewListener(this)
+
+    override fun onScrollViewTouchEvent(event: MotionEvent?) {
+        when(event?.action) {
+            MotionEvent.ACTION_DOWN -> {
+                fabText.collapse()
+            }
+            MotionEvent.ACTION_UP -> {
+                fabText.expand()
             }
         }
     }
+}
+```
 
 ### Loading
 
